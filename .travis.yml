@@ -1,0 +1,17 @@
+sudo: required
+
+services:
+- docker
+
+language: node_js
+node_js:
+- node
+
+script:
+- docker build . -t foobert/gc-query
+
+deploy:
+  provider: script
+  script: bash bin/push.sh foobert/gc-query
+  on:
+    all_branches: true

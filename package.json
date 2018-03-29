@@ -1,13 +1,15 @@
 {
-  "name": "gc3-rest",
+  "name": "gc-query",
   "version": "1.0.0",
-  "description": "",
+  "description": "A query interface for the geocache database",
   "main": "index.js",
+  "repository": "https://github.com/foobert/gc-query.git",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "foobert",
+  "license": "MIT",
   "dependencies": {
     "compression": "^1.7.2",
     "cors": "^2.8.4",
@@ -15,7 +17,9 @@
     "express": "^4.16.3",
     "mongodb": "^3.0.5",
     "morgan": "^1.9.0",
-    "nodemon": "^1.17.2",
     "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
   }
 }
