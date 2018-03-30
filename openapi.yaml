@@ -1,0 +1,69 @@
+openapi: '3.0.1'
+
+info:
+  title: GC Query
+  description: A query server for the Geocache database
+  version: "1.0.0"
+
+servers:
+- url: https://gc.funkenburg.net/api
+
+paths:
+  /poi.gpx:
+    get:
+      summary: Garmin-compatible Points Of Interest in GPX format
+      description: |
+        Returns a list of geocaches for use in Garmin GPS devices.
+      parameters:
+      - name: type
+        in: query
+        description: Filter by geocache type.
+        required: false
+        schema:
+          type: string
+          enum:
+          - traditional
+          - multi
+          - event
+          - earth
+          - wherigo
+          - mystery
+          - virtual
+          - letterbox
+          - cito
+      - name: disabled
+        in: query
+        description: Filter by geocache disabled flag.
+        required: false
+        schema:
+          type: string
+          enum:
+          - 0
+          - 1
+      - name: score
+        in: query
+        description: |
+          Filter by "found score" of at least this value. Higher values will
+          ensure that the geocache has been found recently. A good value seems
+          to be 0.5
+        required: false
+        schema:
+          type: number
+          minimum: 0
+          maximum: 1
+      - name: exclude
+        in: query
+        description: Exclude geocaches found by someone. Can be given mutliple times.
+        required: false
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: A list of geocaches. See also [GPX schema](http://www.topografix.com/gpx/1/1/).
+          content:
+            appliction/gpx+xml:
+              schema:
+                type: string
