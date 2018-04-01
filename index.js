@@ -4,9 +4,11 @@ const mongo = require("mongodb");
 const compression = require("compression");
 const cors = require("cors");
 const morgan = require("morgan");
+const { graphiqlExpress } = require("apollo-server-express");
 
 const find = require("./lib/find");
 const gpx = require("./lib/gpx");
+const graphql = require("./lib/graphql");
 
 async function main() {
   const url = process.env["GC_DB_URI"] || "mongodb://localhost:27017";
@@ -25,6 +27,9 @@ async function main() {
     const result = await gpx(cursor);
     res.type("application/gpx+xml").send(result);
   });
+
+  app.use("/graphql", graphql({ gcs }));
+  app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
   app.listen(8080);
 }
