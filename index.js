@@ -4,7 +4,6 @@ const mongo = require("mongodb");
 const compression = require("compression");
 const cors = require("cors");
 const morgan = require("morgan");
-const { graphiqlExpress } = require("apollo-server-express");
 
 const find = require("./lib/find");
 const gpx = require("./lib/gpx");
@@ -29,7 +28,6 @@ async function main() {
   });
 
   app.use("/graphql", graphql(db));
-  app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
   app.listen(8080);
 }
