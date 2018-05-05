@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter lcovonly mocha && codacy-coverage < coverage/lcov.info",
+    "lint": "eslint ."
   },
   "author": "foobert",
   "license": "MIT",
@@ -28,6 +30,12 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "nodemon": "^1.17.2"
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "mongo-mock": "^3.1.0",
+    "nodemon": "^1.17.2",
+    "nyc": "^11.7.1",
+    "sinon": "^5.0.3",
+    "sinon-chai": "^3.0.0"
   }
 }
