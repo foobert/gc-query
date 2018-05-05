@@ -11,6 +11,7 @@ const graphql = require("./lib/graphql");
 
 async function main() {
   const url = process.env["GC_DB_URI"] || "mongodb://localhost:27017";
+  debug("Connecting to mongodb at %s", url);
   const client = await mongo.MongoClient.connect(url);
   const db = client.db("gc");
   const gcs = db.collection("gcs");

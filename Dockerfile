@@ -1,4 +1,5 @@
 FROM node:alpine
+LABEL maintainer="https://github.com/foobert/gc-siphon"
 WORKDIR /usr/src/app
 COPY package.json package-lock.json /usr/src/app/
 RUN npm install --production
