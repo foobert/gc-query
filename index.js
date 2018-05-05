@@ -28,7 +28,7 @@ async function main() {
     res.type("application/gpx+xml").send(result);
   });
 
-  app.use("/graphql", graphql(db));
+  app.use("/api/graphql", graphql(db));
 
   app.listen(8080);
 }
