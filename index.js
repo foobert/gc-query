@@ -5,7 +5,7 @@ const compression = require("compression");
 const cors = require("cors");
 const morgan = require("morgan");
 
-const find = require("./lib/find");
+const { find } = require("./lib/find");
 const gpx = require("./lib/gpx");
 const graphql = require("./lib/graphql");
 
