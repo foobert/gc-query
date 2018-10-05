@@ -9,7 +9,7 @@ node_js:
 
 script:
 - docker build . -t foobert/gc-query
-- npm run coverage
+  #- npm run coverage
 
 deploy:
   provider: script
