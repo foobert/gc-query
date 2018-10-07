@@ -23,9 +23,18 @@ async function main() {
   app.use(morgan("tiny"));
 
   app.get("/api/poi.gpx", async (req, res) => {
-    const cursor = find(gcs, req.query);
-    const result = await gpx(cursor);
-    res.type("application/gpx+xml").send(result);
+    let cursor;
+    try {
+      const cursor = find(gcs, req.query).maxTimeMS(10 * 60 * 1000);
+      res.type("application/gpx+xml");
+      await gpx(cursor, data => res.write(data));
+      res.end("");
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Something went wrong");
+    } finally {
+      if (cursor) cursor.close();
+    }
   });
 
   app.use("/api/graphql", graphql(db));
