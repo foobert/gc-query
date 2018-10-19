@@ -22,6 +22,9 @@ async function main() {
   app.use(cors());
   app.use(morgan("tiny"));
 
+  const apollo = graphql(db);
+  apollo.applyMiddleware({ app, path: "/api/graphql" });
+
   app.get("/api/poi.gpx", async (req, res) => {
     let cursor;
     try {
@@ -36,8 +39,6 @@ async function main() {
       if (cursor) cursor.close();
     }
   });
-
-  app.use("/api/graphql", graphql(db));
 
   app.listen(8080);
 }
