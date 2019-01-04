@@ -8,6 +8,7 @@ const morgan = require("morgan");
 const { find } = require("./lib/find");
 const gpx = require("./lib/gpx");
 const graphql = require("./lib/graphql");
+const metrics = require("./lib/metrics");
 
 async function main() {
   const url = process.env["GC_DB_URI"] || "mongodb://localhost:27017";
@@ -18,6 +19,7 @@ async function main() {
 
   const app = express();
 
+  app.use(metrics.expressjs());
   app.use(compression());
   app.use(cors());
   app.use(morgan("tiny"));
