@@ -53,7 +53,7 @@ paths:
           maximum: 1
       - name: exclude
         in: query
-        description: Exclude geocaches found by someone. Can be given mutliple times.
+        description: Exclude geocaches found by someone. Can be given multiple times.
         required: false
         explode: true
         schema:
